@@ -12,19 +12,27 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+        // Create a list of some strings that will be shown in the listview
         val animalList = listOf("dog", "cat", "bear", "rabbit")
 
-        val myAdopter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,animalList)
+        // Create an adapter with 3 parameters: activity (this), layout, list
+        val myAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, animalList)
 
-        animal_list.adapter = myAdopter
+        // set the adapter to listview
+        animal_list.adapter = myAdapter
 
 
+        // Registering setOnItemClickListener that listens item click events in the listview
         animal_list.setOnItemClickListener { list, item, position, id ->
 
+            // Determine which item in the list is selected
             val selectedItem = list.getItemAtPosition(position).toString()
             Toast.makeText(this, selectedItem, Toast.LENGTH_SHORT).show()
 
-            var imageId = when(position){
+
+            // Based on the index of position selected, set the corresponding image
+            val imageId = when(position){
                 0 -> R.drawable.dog
                 1 -> R.drawable.cat
                 2 -> R.drawable.bear
